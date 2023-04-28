@@ -1,0 +1,13 @@
+# Django
+django==4.2
+
+# Network & Utils
+requests==2.23.0
+
+# Cryptography & Security
+PyJWT==2.6.0
+jwcrypto==0.7
+
+uuid==1.30
+djangorestframework==3.14.0
+cryptography==40.0.2
