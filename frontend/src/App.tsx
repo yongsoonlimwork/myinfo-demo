@@ -1,9 +1,10 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import React from 'react';
 import { ROUTES } from '@/constants';
-import Home from '@/views/Home';
 import styled from 'styled-components';
-import Callback from "@/views/Callback";
+import Callback from '@/views/Callback';
+import Home from '@/views/Home';
+import Info from '@/views/Info';
 
 const App: React.FC = () => {
   return (
@@ -11,6 +12,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path={ROUTES.HOME} element={<Home />} />
         <Route path={ROUTES.CALLBACK} element={<Callback />} />
+        <Route path={ROUTES.INFO_PAGE} element={<Info />} />
         <Route path="*" element={<Navigate to={ROUTES.HOME} />} />
       </Routes>
     </Container>

@@ -11,3 +11,5 @@ jwcrypto==0.7
 uuid==1.30
 djangorestframework==3.14.0
 cryptography==40.0.2
+django-cors-headers==3.14.0
+six==1.16.0

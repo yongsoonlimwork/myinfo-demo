@@ -3,6 +3,7 @@ from json import JSONDecodeError
 from urllib.parse import quote, urlencode
 import requests
 
+from api.utils import disable_ssl_warnings
 from myinfo import settings
 from myinfo.security import generate_authorization_header
 
@@ -53,7 +54,7 @@ class MyInfoClient(object):
         except JSONDecodeError:
             return response.text
 
-    def get_access_token(self, auth_code: str, callback_url: str = None):
+    def get_access_token(self, auth_code: str, callback_url: str = None, state: str = None):
         """
         Generate an access token when presented with a valid authcode obtained from the Authorise API.
         This token can then be used to request for the user's data that were consented.
@@ -74,14 +75,17 @@ class MyInfoClient(object):
             "grant_type": "authorization_code",
             "redirect_uri": callback_url,
         }
+        if state:
+            params['state'] = state
         auth_header = generate_authorization_header(
             url=api_url, params=params, method="POST", app_id=settings.MYINFO_CLIENT_ID
         )
         log.info("auth_header: %s", auth_header)
 
-        resp = self.request(api_url, method="POST", auth_header=auth_header, data=params)
+        with disable_ssl_warnings():
+            resp = self.request(api_url, method="POST", auth_header=auth_header, data=params)
 
-        return resp
+            return resp
 
     def get_person(self, uinfin, access_token):
         """
@@ -96,9 +100,10 @@ class MyInfoClient(object):
         auth_header += f",Bearer {access_token}"
         log.info("auth_header: %s", auth_header)
 
-        resp = self.request(api_url, method="GET", auth_header=auth_header, params=params)
+        with disable_ssl_warnings():
+            resp = self.request(api_url, method="GET", auth_header=auth_header, params=params)
 
-        return resp
+            return resp
 
     @staticmethod
     def get_authorise_url(state, callback_url: str = None):

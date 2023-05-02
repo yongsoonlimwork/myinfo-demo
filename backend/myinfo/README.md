@@ -1,10 +1,9 @@
-Ablr Coding Challenge 2020 (Django + React)
 ===========================================
 
 ## Overview
 
 Use the existing code provided (or roll your own as you see fit), build a **Django-backed** application with
-**React frontend** to demonstrate the integration with MyInfo APIs, similar to the Demo app provided by 
+**React frontend** to demonstrate the integration with MyInfo APIs, similar to the Demo app provided by
 Singapore Government Technology Agency (GovTech): https://github.com/ndi-trusted-data/myinfo-demo-app
 
 
@@ -72,12 +71,12 @@ print(decrypted)
 
 * Contact Info
 
-![Contact Info](./sample/contact_info.png)
+![Contact Info](../sample/contact_info.png)
 
 * Personal Info
 
-![Personal Info](./sample/personal_info.png)
+![Personal Info](../sample/personal_info.png)
 
 * Income Info
 
-![Income Info](./sample/income_info.png)
+![Income Info](../sample/income_info.png)

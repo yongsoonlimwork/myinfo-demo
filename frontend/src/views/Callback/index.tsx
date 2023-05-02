@@ -1,16 +1,36 @@
 import React, { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import CenterWrapper from '@/components/CenterWrapper';
+import Loader from '@/components/Loader';
+import { ROUTES } from '@/constants';
 
 const Callback: React.FC = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    for (const [key, value] of searchParams.entries()) {
-      console.log(`${key}: ${value}`);
+    const code = searchParams.get('code');
+    const state = searchParams.get('state');
+    if (code) {
+      // Has code query param, navigate to info page to get data
+      navigate(ROUTES.INFO_PAGE, {
+        state: {
+          code,
+          state
+        }
+      });
+    } else {
+      // Callback page is accessed without code query param, redirect back to homepage
+      navigate(ROUTES.HOME);
+      alert('An issue occurred, please try again');
     }
-  }, [searchParams]);
+  }, [navigate, searchParams]);
 
-  return <div>Callback Page</div>;
+  return (
+    <CenterWrapper>
+      <Loader />
+    </CenterWrapper>
+  );
 };
 
 export default Callback;
